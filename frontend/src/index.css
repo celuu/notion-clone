@@ -23,6 +23,7 @@
 
 body {
   margin: 0;
+  background-color: #fffefc;
   font-family: 'inter-ui-regular', 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

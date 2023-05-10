@@ -12,9 +12,9 @@ const findUser = async (req, res) => {
     try {
         const exists = await User.findOne({ email });
         if (exists) {
-            res.status(200);
+            res.status(200).json({ email });
         } else {
-            res.status(400);
+            res.status(400).json({ error: error.message });
         }
     } catch (error) {
         res.status(400).json({ error: error.message });
