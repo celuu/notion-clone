@@ -1,23 +1,23 @@
 import React, { useState } from "react";
-import { useLogin } from "../hooks/useLogin";
+import { useSignup } from "../../hooks/useSignup";
 
-const Login: React.FC = () => {
+const Signup: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { login, error, isLoading } = useLogin();
+  const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await login(email, password);
+    await signup(email, password);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Log in</h1>
+    <form className="signup-form" onSubmit={handleSubmit}>
+      <h1>Sign up</h1>
       <label htmlFor="email">Email</label>
       <input
         type="text"
-        id="email"
+        name="email"
         placeholder="Enter your email address..."
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -25,7 +25,7 @@ const Login: React.FC = () => {
       <label htmlFor="password">Password</label>
       <input
         type="password"
-        id="password"
+        name="password"
         placeholder="Enter your password..."
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -36,4 +36,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Signup;
