@@ -5,6 +5,22 @@ const createToken = (_id) => {
     return jwt.sign({ _id }, process.env.SECRET_OR_KEY);
 }
 
+// user existence check
+
+const findUser = async (req, res) => {
+    const { email } = req.body;
+    try {
+        const exists = await User.findOne({ email });
+        if (exists) {
+            res.status(200);
+        } else {
+            res.status(400);
+        }
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
 // login user
 
 const loginUser = async(req, res) => {
@@ -31,4 +47,4 @@ const signupUser = async (req, res) => {
     }
 };
 
-module.exports = {loginUser, signupUser}
+module.exports = { findUser, loginUser, signupUser }

@@ -1,6 +1,21 @@
+@font-face {
+  font-family: "inter-ui-regular";
+  src: url("./assets/inter-ui-regular.woff");
+}
+
+@font-face {
+  font-family: "inter-ui-medium";
+  src: url("./assets/inter-ui-medium.woff");
+}
+
+@font-face {
+  font-family: "inter-ui-bold";
+  src: url("./assets/inter-ui-bold.woff");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'inter-ui-regular', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
