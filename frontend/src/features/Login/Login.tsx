@@ -31,10 +31,10 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="login-page">
-      <div className="login-form-container">
+    <div className="session-page">
+      <div className="session-form-container">
         <h1>Log in</h1>
-        <form className="login-form" onSubmit={handleFormSubmit}>
+        <form className="session-form" onSubmit={handleFormSubmit}>
           <button className="form-button continue-with google">
             <img
               src={GoogleLogo}
@@ -60,7 +60,7 @@ const Login: React.FC = () => {
           </div>
           <label htmlFor="email">Email</label>
           <input
-            type="text"
+            type="search"
             id="email"
             placeholder="Enter your email address..."
             value={email}
