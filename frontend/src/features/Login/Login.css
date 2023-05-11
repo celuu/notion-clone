@@ -3,7 +3,6 @@
   font-size: 15px;
   line-height: 26px;
   padding: 4px 10px;
-  position: relative;
   border: 0px;
   border-radius: 4px;
   box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px inset;
@@ -11,7 +10,7 @@
   cursor: text;
   margin-top: 4px;
   margin-bottom: 8px;
-  width: calc(100% - 20px);
+  width: 100%;
 }
 
 #email:focus, #password:focus {
@@ -23,6 +22,12 @@
   color: rgba(55, 53, 47, 0.4);
   user-select: none;
 }
+
+#email {
+  position: relative;
+}
+
+
 
 .continue-with-logo {
   margin: 0 6px 2px 0;

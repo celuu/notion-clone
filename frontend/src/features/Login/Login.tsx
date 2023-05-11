@@ -3,16 +3,17 @@ import { useLogin } from "../../hooks/useLogin";
 import { useFindUser } from "../../hooks/useFindUser";
 import GoogleLogo from "../../assets/google-logo.png";
 import AppleLogo from "../../assets/apple-logo.png";
+import { Spinner } from "@chakra-ui/react";
 import "./Login.css";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { login, error, isLoading } = useLogin();
-  const { findUser, isUserLoading, foundUser } = useFindUser();
+  const { findUser, isUserLoading, foundUser, findUserError } = useFindUser();
 
   const handleFindUser = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FormEvent
   ) => {
     e.preventDefault();
     await findUser(email);
@@ -23,21 +24,35 @@ const Login: React.FC = () => {
     await login(email, password);
   };
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (foundUser) handleSubmit(e);
+    else handleFindUser(e);
+  };
+
   return (
     <div className="login-page">
       <div className="login-form-container">
         <h1>Log in</h1>
-        <form className="login-form">
+        <form className="login-form" onSubmit={handleFormSubmit}>
           <button className="form-button continue-with google">
             <img
               src={GoogleLogo}
               height="14px"
+              width="14px"
               className="continue-with-logo"
+              alt="google logo"
             />
             Continue with Google
           </button>
           <button className="form-button continue-with apple">
-            <img src={AppleLogo} height="16px" className="continue-with-logo" />
+            <img
+              src={AppleLogo}
+              height="16px"
+              width="16px"
+              className="continue-with-logo"
+              alt="apple logo"
+            />
             Continue with Apple
           </button>
           <div className="separator-container">
@@ -69,6 +84,7 @@ const Login: React.FC = () => {
               disabled={!!isUserLoading}
               onClick={handleFindUser}
             >
+              {isUserLoading && <Spinner size="xs" sx={{ mr: "5px" }} />}
               Continue with email
             </button>
           ) : (
@@ -77,10 +93,13 @@ const Login: React.FC = () => {
               disabled={!!isLoading}
               onClick={handleSubmit}
             >
-              Continue with password
+              {isLoading && <Spinner size="xs" sx={{ mr: "5px" }} />}Continue
+              with password
             </button>
           )}
-          {error && <div className="error">{error}</div>}
+          {(error || findUserError) && (
+            <div className="error">{error || findUserError}</div>
+          )}
         </form>
         <div className="disclaimer-text">
           <p>

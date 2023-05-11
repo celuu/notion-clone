@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 export const useFindUser = () => {
   const [foundUser, setFoundUser] = useState<boolean | null>(null);
   const [isUserLoading, setIsUserLoading] = useState<boolean | null>(null);
+  const [findUserError, setFindUserError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const findUser = async (email: string) => {
@@ -16,6 +17,7 @@ export const useFindUser = () => {
       },
       body: JSON.stringify({ email })
     })
+    const json = await res.json();
 
     if (res.ok) {
       setFoundUser(true);
@@ -23,8 +25,9 @@ export const useFindUser = () => {
     } else {
       setFoundUser(false);
       setIsUserLoading(false);
-      navigate("/signup");
+      setFindUserError(json.error);
+      if (res.status !== 400) navigate("/signup");
     }
   }
-  return { findUser, isUserLoading, foundUser };
+  return { findUser, isUserLoading, foundUser, findUserError };
 };
