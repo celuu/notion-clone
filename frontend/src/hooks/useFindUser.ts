@@ -26,7 +26,7 @@ export const useFindUser = () => {
       setFoundUser(false);
       setIsUserLoading(false);
       setFindUserError(json.error);
-      if (res.status !== 400) navigate("/signup");
+      if (res.status !== 400) navigate("/signup", { state: { email } });
     }
   }
   return { findUser, isUserLoading, foundUser, findUserError };

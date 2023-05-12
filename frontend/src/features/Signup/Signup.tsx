@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSignup } from "../../hooks/useSignup";
 import "../Login/Login.css";
 import { Spinner } from "@chakra-ui/spinner";
 import GoogleLogo from "../../assets/google-logo.png";
 import AppleLogo from "../../assets/apple-logo.png";
+import { useLocation } from "react-router";
 
 const Signup: React.FC = () => {
+  const location = useLocation();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { signup, error, isLoading } = useSignup();
@@ -14,6 +16,10 @@ const Signup: React.FC = () => {
     e.preventDefault();
     await signup(email, password);
   };
+
+  useEffect(() => {
+    if (location.state.email) setEmail(location.state.email);
+  }, []);
 
   return (
     <div className="session-page">
@@ -36,7 +42,10 @@ const Signup: React.FC = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button disabled={!!isLoading} className="form-button submit signup-submit">
+          <button
+            disabled={!!isLoading}
+            className="form-button submit signup-submit"
+          >
             {isLoading && <Spinner size="xs" sx={{ mr: "5px" }} />}Continue with
             password
           </button>
