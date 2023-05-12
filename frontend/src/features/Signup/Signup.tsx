@@ -19,7 +19,7 @@ const Signup: React.FC = () => {
 
   useEffect(() => {
     if (location.state.email) setEmail(location.state.email);
-  }, []);
+  }, [location.state.email]);
 
   return (
     <div className="session-page">
