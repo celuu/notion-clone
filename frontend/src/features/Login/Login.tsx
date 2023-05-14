@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
 import { useFindUser } from "../../hooks/useFindUser";
 import GoogleLogo from "../../assets/google-logo.png";
@@ -11,6 +11,22 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const { login, error, isLoading } = useLogin();
   const { findUser, isUserLoading, foundUser, findUserError } = useFindUser();
+
+  const handleCallbackResponse = (response: any) => {
+    console.log("Encoded JWT ID token:" + response.credential)
+  }
+
+  // useEffect(() => {
+  //   ({
+  //     client_id: "398210348399-4jmlv3hnvjmdek86p1jk5cb3m8m0n7fm.apps.googleusercontent.com",
+  //     callback: handleCallbackResponse
+  //   });
+
+  //   google.accounts.id.renderButton(
+  //     document.getElementById("signInDiv"),
+  //     {theme: "outline", size: "large"}
+  //   );
+  // }, [])
 
   const handleFindUser = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FormEvent
@@ -35,6 +51,7 @@ const Login: React.FC = () => {
       <div className="session-form-container">
         <h1>Log in</h1>
         <form className="session-form" onSubmit={handleFormSubmit}>
+          <div id="signInDiv"></div>
           <button className="form-button continue-with google">
             <img
               src={GoogleLogo}

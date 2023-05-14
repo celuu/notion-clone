@@ -3,12 +3,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./features/Login/Login";
 import Signup from "./features/Signup/Signup";
 import "./App.css";
+import Navigation from "./components/Navigation";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <div className="pages">
+          <Navigation />
           <Routes>
             {/* <Route path="/" element={Home} /> */}
             <Route path="/login" element={<Login />} />
