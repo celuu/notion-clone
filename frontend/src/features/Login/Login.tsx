@@ -73,6 +73,7 @@ const Login: React.FC = () => {
                 type="password"
                 id="password"
                 placeholder="Enter your password..."
+                autoFocus
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
