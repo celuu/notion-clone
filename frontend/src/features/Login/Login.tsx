@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
 import { useFindUser } from "../../hooks/useFindUser";
 import GoogleLogo from "../../assets/google-logo.png";
 import AppleLogo from "../../assets/apple-logo.png";
 import { Spinner } from "@chakra-ui/react";
+
 import "./Login.css";
 
 const Login: React.FC = () => {
@@ -11,6 +12,12 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const { login, error, isLoading } = useLogin();
   const { findUser, isUserLoading, foundUser, findUserError } = useFindUser();
+
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.intializer
+  }, [])
+  
 
   const handleFindUser = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FormEvent
