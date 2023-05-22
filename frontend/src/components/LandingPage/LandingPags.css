@@ -1,0 +1,16 @@
+.hamburger-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.hamburger-menu span {
+    height: 20px;
+    width: 4px;
+    background-color: #000;
+    margin: 4px 0;
+}

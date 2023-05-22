@@ -13,10 +13,10 @@ const Login: React.FC = () => {
   const { login, error, isLoading } = useLogin();
   const { findUser, isUserLoading, foundUser, findUserError } = useFindUser();
 
-  useEffect(() => {
-    /* global google */
-    google.accounts.id.intializer
-  }, [])
+  // useEffect(() => {
+  //   /* global google */
+  //   google.accounts.id.intializer
+  // }, [])
   
 
   const handleFindUser = async (
@@ -52,7 +52,7 @@ const Login: React.FC = () => {
             />
             Continue with Google
           </button>
-          <button className="form-button continue-with apple">
+          {/* <button className="form-button continue-with apple">
             <img
               src={AppleLogo}
               height="16px"
@@ -61,7 +61,7 @@ const Login: React.FC = () => {
               alt="apple logo"
             />
             Continue with Apple
-          </button>
+          </button> */}
           <div className="separator-container">
             <div role="separator" className="separator"></div>
           </div>
