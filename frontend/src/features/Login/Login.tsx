@@ -4,6 +4,9 @@ import { useFindUser } from "../../hooks/useFindUser";
 import GoogleLogo from "../../assets/google-logo.png";
 import AppleLogo from "../../assets/apple-logo.png";
 import { Spinner } from "@chakra-ui/react";
+import { GoogleLogin } from '@react-oauth/google';
+
+
 
 import "./Login.css";
 
@@ -42,7 +45,15 @@ const Login: React.FC = () => {
       <div className="session-form-container">
         <h1>Log in</h1>
         <form className="session-form" onSubmit={handleFormSubmit}>
-          <button className="form-button continue-with google">
+          <GoogleLogin width="320px"
+            onSuccess={credentialResponse => {
+              console.log(credentialResponse);
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
+          {/* <button className="form-button continue-with google">
             <img
               src={GoogleLogo}
               height="14px"
@@ -51,7 +62,7 @@ const Login: React.FC = () => {
               alt="google logo"
             />
             Continue with Google
-          </button>
+          </button> */}
           {/* <button className="form-button continue-with apple">
             <img
               src={AppleLogo}

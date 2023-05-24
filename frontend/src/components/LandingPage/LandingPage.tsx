@@ -28,6 +28,7 @@ const LandingPage: React.FC  = () => {
             isOpen={isOpen}
             placement='left'
             onClose={onClose}
+          
         >
         <DrawerOverlay />
         <DrawerContent>
