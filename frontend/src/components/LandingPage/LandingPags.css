@@ -1,16 +1,13 @@
-.hamburger-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    background-color: #ccc;
-    cursor: pointer;
+
+.left-arrow {
+    padding: 1px;
+    height: 5vh;
 }
 
-.hamburger-menu span {
-    height: 20px;
-    width: 4px;
-    background-color: #000;
-    margin: 4px 0;
+.hamburger-icon {
+    height:3.5vh;
+    width:100px; 
+    cursor:pointer; 
+    margin-top:5px; 
+    left:0px;
 }

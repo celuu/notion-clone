@@ -12,6 +12,8 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react'
+import { HamburgerIcon, ArrowLeftIcon } from '@chakra-ui/icons'
+import "./LandingPags.css"
 
 
 const LandingPage: React.FC  = () => {
@@ -22,7 +24,7 @@ const LandingPage: React.FC  = () => {
         <>
    
         <div className="hamburger-menu" onClick={onOpen}>
-            <Button>Open Nav</Button>
+            <HamburgerIcon className="hamburger-icon"/>
         </div>
         <Drawer
             isOpen={isOpen}
@@ -32,12 +34,10 @@ const LandingPage: React.FC  = () => {
         >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton />
+          <DrawerCloseButton onClick={onClose}/>
           <DrawerBody>
             <NavBar />
           </DrawerBody>
-
-
         </DrawerContent>
       </Drawer>
         </>
