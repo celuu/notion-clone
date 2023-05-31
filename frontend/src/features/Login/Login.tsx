@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
 import { useFindUser } from "../../hooks/useFindUser";
-import GoogleLogo from "../../assets/google-logo.png";
-import AppleLogo from "../../assets/apple-logo.png";
 import { Spinner } from "@chakra-ui/react";
 import { GoogleLogin } from '@react-oauth/google';
-
-
-
+import { hasGrantedAllScopesGoogle } from '@react-oauth/google';
+import { Navigate, redirect } from "react-router-dom";
 import "./Login.css";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { login, error, isLoading } = useLogin();
   const { findUser, isUserLoading, foundUser, findUserError } = useFindUser();
-
-  // useEffect(() => {
-  //   /* global google */
-  //   google.accounts.id.intializer
-  // }, [])
-  
+  const {user} = useAuthContext();
 
   const handleFindUser = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FormEvent
@@ -40,6 +33,10 @@ const Login: React.FC = () => {
     else handleFindUser(e);
   };
 
+  if (user) {
+    return <Navigate to='/' replace/>
+  }
+  
   return (
     <div className="session-page">
       <div className="session-form-container">

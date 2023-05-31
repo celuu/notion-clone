@@ -56,6 +56,7 @@ const Signup: React.FC = () => {
             <GoogleLogin width="320px"
             onSuccess={credentialResponse => {
               console.log(credentialResponse);
+              console.log("it worked")
             }}
             onError={() => {
               console.log('Login Failed');

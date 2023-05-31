@@ -5,9 +5,35 @@
 }
 
 .hamburger-icon {
-    height:3.5vh;
-    width:100px; 
+    height: 4vh;
+    width:120px; 
     cursor:pointer; 
     margin-top:5px; 
     left:0px;
+}
+
+.hamburger-menu {
+    display: flex;
+    padding: 10px;
+}
+
+.logout-button {
+    cursor: pointer;
+}
+
+.nav-bar-arrow-left {
+    cursor: pointer;
+    margin-left: 100px;
+}
+
+.arrow-left-container {
+    display: flex;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.arrow-left-container:hover {
+    display: flex;
+    padding: 10px;
+    background-color: red;
 }

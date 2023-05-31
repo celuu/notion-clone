@@ -4,42 +4,53 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import {
   Drawer,
   DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Button,
 } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react'
 import { HamburgerIcon, ArrowLeftIcon } from '@chakra-ui/icons'
 import "./LandingPags.css"
+import Logout from "../../features/Logout/Logout";
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { Navigate } from "react-router-dom";
+import { useState } from "react";
 
 
 const LandingPage: React.FC  = () => {
-    const {user} = useAuthContext();
+    let {user} = useAuthContext();
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [userDropDown, setUserDropDown] = useState<boolean>(false);
+
+    if (!user) {
+        return <Navigate to='/login' replace/>
+    }
 
     return(
         <>
    
         <div className="hamburger-menu" onClick={onOpen}>
-            <HamburgerIcon className="hamburger-icon"/>
+            <HamburgerIcon boxSize={6} className="hamburger-icon"/>
         </div>
-        <Drawer
-            isOpen={isOpen}
-            placement='left'
-            onClose={onClose}
-          
-        >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton onClick={onClose}/>
-          <DrawerBody>
-            <NavBar />
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+        <div className="whole-nav-bar">
+          <Drawer
+              isOpen={isOpen}
+              placement='left'
+              onClose={onClose}
+          >
+          <DrawerOverlay />
+            <DrawerContent>
+              <div className="arrow-left-container">
+                <div className="user-scribble-text">{user.user.email}'s Scribble</div>
+                <ArrowLeftIcon onClick={onClose} className="nav-bar-arrow-left"/>
+              </div>
+              <DrawerBody>
+                <NavBar />
+              </DrawerBody>
+            </DrawerContent>
+          </Drawer>
+      </div>
+      {user && <Logout />}
         </>
     )
 
