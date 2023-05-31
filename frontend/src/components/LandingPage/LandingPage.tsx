@@ -26,6 +26,13 @@ const LandingPage: React.FC  = () => {
         return <Navigate to='/login' replace/>
     }
 
+    const clickHandlerUser = () => {
+      setUserDropDown(!userDropDown)
+      return (
+        <div>Logout</div>
+      )
+    }
+
     return(
         <>
    
@@ -41,7 +48,8 @@ const LandingPage: React.FC  = () => {
           <DrawerOverlay />
             <DrawerContent>
               <div className="arrow-left-container">
-                <div className="user-scribble-text">{user.user.email}'s Scribble</div>
+                <div className="user-scribble-text" onClick={() => clickHandlerUser()}>{user.user.email}'s Scribble</div>
+                
                 <ArrowLeftIcon onClick={onClose} className="nav-bar-arrow-left"/>
               </div>
               <DrawerBody>
