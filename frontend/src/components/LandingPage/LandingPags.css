@@ -37,3 +37,17 @@
     padding: 10px;
     background-color: red;
 }
+
+.user-panel-container {
+    position: absolute;
+    width: 320px;
+    height: 10vh;
+    top: 70px;
+    left: 5px;
+    background-color: rgba(242, 241, 238, 0.6);
+    border-radius: 5px;
+    outline: 2px gray;
+    display: flex;
+    flex-direction: column;
+
+}

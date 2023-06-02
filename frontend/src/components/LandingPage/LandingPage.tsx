@@ -11,10 +11,10 @@ import {
 import { useDisclosure } from '@chakra-ui/react'
 import { HamburgerIcon, ArrowLeftIcon } from '@chakra-ui/icons'
 import "./LandingPags.css"
-import Logout from "../../features/Logout/Logout";
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
+import UserPanel from "./UserPanel";
 
 
 const LandingPage: React.FC  = () => {
@@ -26,12 +26,11 @@ const LandingPage: React.FC  = () => {
         return <Navigate to='/login' replace/>
     }
 
-    const clickHandlerUser = () => {
-      setUserDropDown(!userDropDown)
-      return (
-        <div>Logout</div>
-      )
+    const onClickEvent = () => {
+      onClose();
+      setUserDropDown(false);
     }
+
 
     return(
         <>
@@ -43,14 +42,15 @@ const LandingPage: React.FC  = () => {
           <Drawer
               isOpen={isOpen}
               placement='left'
-              onClose={onClose}
+              onClose={onClickEvent}
           >
           <DrawerOverlay />
             <DrawerContent>
               <div className="arrow-left-container">
-                <div className="user-scribble-text" onClick={() => clickHandlerUser()}>{user.user.email}'s Scribble</div>
-                
-                <ArrowLeftIcon onClick={onClose} className="nav-bar-arrow-left"/>
+                <div onClick={(e) => setUserDropDown(!userDropDown)} className="user-scribble-text">{user.user.email}'s Scribble</div>
+                {userDropDown && <UserPanel />}
+
+                <ArrowLeftIcon onClick={onClickEvent} className="nav-bar-arrow-left"/>
               </div>
               <DrawerBody>
                 <NavBar />
@@ -58,7 +58,6 @@ const LandingPage: React.FC  = () => {
             </DrawerContent>
           </Drawer>
       </div>
-      {user && <Logout />}
         </>
     )
 

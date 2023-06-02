@@ -14,6 +14,7 @@ const Login: React.FC = () => {
   const { login, error, isLoading } = useLogin();
   const { findUser, isUserLoading, foundUser, findUserError } = useFindUser();
   const {user} = useAuthContext();
+  const [googleUser, setGoogleUser] = useState<Object>({});
 
   const handleFindUser = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FormEvent
@@ -44,7 +45,7 @@ const Login: React.FC = () => {
         <form className="session-form" onSubmit={handleFormSubmit}>
           <GoogleLogin width="320px"
             onSuccess={credentialResponse => {
-              console.log(credentialResponse);
+              console.log(credentialResponse)
             }}
             onError={() => {
               console.log('Login Failed');
