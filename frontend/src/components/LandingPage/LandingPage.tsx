@@ -4,41 +4,60 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import {
   Drawer,
   DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Button,
 } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react'
+import { HamburgerIcon, ArrowLeftIcon } from '@chakra-ui/icons'
+import "./LandingPags.css"
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { Navigate } from "react-router-dom";
+import { useState } from "react";
+import UserPanel from "./UserPanel";
 
 
 const LandingPage: React.FC  = () => {
-    const {user} = useAuthContext();
+    let {user} = useAuthContext();
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [userDropDown, setUserDropDown] = useState<boolean>(false);
+
+    if (!user) {
+        return <Navigate to='/login' replace/>
+    }
+
+    const onClickEvent = () => {
+      onClose();
+      setUserDropDown(false);
+    }
+
 
     return(
         <>
    
         <div className="hamburger-menu" onClick={onOpen}>
-            <Button>Open Nav</Button>
+            <HamburgerIcon boxSize={6} className="hamburger-icon"/>
         </div>
-        <Drawer
-            isOpen={isOpen}
-            placement='left'
-            onClose={onClose}
-        >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerBody>
-            <NavBar />
-          </DrawerBody>
+        <div className="whole-nav-bar">
+          <Drawer
+              isOpen={isOpen}
+              placement='left'
+              onClose={onClickEvent}
+          >
+          <DrawerOverlay />
+            <DrawerContent>
+              <div className="arrow-left-container">
+                <div onClick={(e) => setUserDropDown(!userDropDown)} className="user-scribble-text">{user.user.email}'s Scribble</div>
+                {userDropDown && <UserPanel />}
 
-
-        </DrawerContent>
-      </Drawer>
+                <ArrowLeftIcon onClick={onClickEvent} className="nav-bar-arrow-left"/>
+              </div>
+              <DrawerBody>
+                <NavBar />
+              </DrawerBody>
+            </DrawerContent>
+          </Drawer>
+      </div>
         </>
     )
 
